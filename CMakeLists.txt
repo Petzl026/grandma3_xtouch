@@ -13,11 +13,13 @@ endif()
 
 add_compile_options(-g -O0)
 if (MSVC)
-  # MSVC doesn't support -Wno-* flags
+  # MSVC: don't use GCC/Clang -Wno-* flags
 else()
-  add_compile_options(-Wno-enum-compare)
+  add_compile_options(
+    -Wno-unused-command-line-argument
+    -Wno-enum-compare
+  )
 endif()
-add_compile_options (-Wno-unused-command-line-argument)
 
 if("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
    message(SEND_ERROR "In-source builds are not allowed.")
