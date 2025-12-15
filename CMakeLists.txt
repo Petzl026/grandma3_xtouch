@@ -12,7 +12,11 @@ if(CCACHE_PROGRAM)
 endif()
 
 add_compile_options(-g -O0)
-add_compile_options (-Wno-enum-compare)
+if (MSVC)
+  # MSVC doesn't support -Wno-* flags
+else()
+  add_compile_options(-Wno-enum-compare)
+endif()
 add_compile_options (-Wno-unused-command-line-argument)
 
 if("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
